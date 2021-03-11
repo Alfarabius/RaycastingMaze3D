@@ -17,7 +17,9 @@ static	unsigned int	get_color(t_tex *side)
 	unsigned int	color;
 	int				textr_y;
 
-	textr_y = ((int)side->start) & (side->y_hg - 1);
+	// textr_y = (int)side->start & (side->y_hg - 1);
+	textr_y = (int)side->start;
+	textr_y = textr_y >= side->y_hg ? side->y_hg - 1 : textr_y;
 	side->start += side->ratio;
 	color = *((unsigned int *)(side->adr + (textr_y * side->ll
 		+ side->textr_x * (side->bpp / 8))));
