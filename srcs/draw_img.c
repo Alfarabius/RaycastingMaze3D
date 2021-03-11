@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_img.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alfarabi <alfarabi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrosie <mrosie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 17:39:26 by mrosie            #+#    #+#             */
-/*   Updated: 2021/03/01 18:16:00 by alfarabi         ###   ########.fr       */
+/*   Updated: 2021/03/11 16:08:02 by mrosie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,18 @@ static	char	hit_check(t_drw *drw, t_all *all)
 		drw->s_dst_x += drw->d_dst_x;
 		drw->map_x += drw->stp_x;
 		if (drw->stp_x > 0)
-			drw->side = 0;
+			drw->side = all->tex.wst;
 		else
-			drw->side = 2;
+			drw->side = all->tex.est;
 	}
 	else
 	{
 		drw->s_dst_y += drw->d_dst_y;
 		drw->map_y += drw->stp_y;
 		if (drw->stp_y > 0)
-			drw->side = 1;
+			drw->side = all->tex.nrt;
 		else
-			drw->side = 3;
+			drw->side = all->tex.sth;
 	}
 	if (all->map.mini_map[drw->map_y][drw->map_x] == '1')
 		return (1);
@@ -80,7 +80,6 @@ int				draw_img(t_all *all)
 	float	z_buff[all->map.width_x];
 
 	drw.x = 0;
-	drw.side = 0;
 	while (drw.x < (int)all->map.width_x)
 	{
 		drw.is_hit = 0;

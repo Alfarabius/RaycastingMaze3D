@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_resolution.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alfarabi <alfarabi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrosie <mrosie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 12:46:21 by mrosie            #+#    #+#             */
-/*   Updated: 2021/03/04 14:42:26 by alfarabi         ###   ########.fr       */
+/*   Updated: 2021/03/11 12:39:30 by mrosie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ int	res_handler(t_all *all)
 	return (1);
 }
 
-int	parse_resolution(char **str, t_all *all)
+int	parse_resolution(char **str, t_all *all, int *flg)
 {
 	int i;
 
 	i = 0;
+	*flg |= flags_checker(*flg, 'R', all);
 	while (str[i])
 		i++;
 	if (i != 3)

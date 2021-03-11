@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alfarabi <alfarabi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrosie <mrosie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 12:16:42 by mrosie            #+#    #+#             */
-/*   Updated: 2021/02/24 17:30:22 by alfarabi         ###   ########.fr       */
+/*   Updated: 2021/03/11 12:39:21 by mrosie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,22 +74,23 @@ int			get_color(char **str, int *flg)
 	return (rgb);
 }
 
-int			parse_color(char flag, char **str, t_all *all)
+int			parse_color(char flag, char **str, t_all *all, int *flg)
 {
 	int		rgb;
-	int		flg;
+	int		f;
 	int		i;
 
 	i = 0;
-	flg = 0;
+	f = 0;
+	*flg |= flags_checker(*flg, flag, all);
 	while (str[++i])
-		if (!valid_color_elem(str[i], &flg, i))
+		if (!valid_color_elem(str[i], &f, i))
 			return (free_tmp(str, 1));
-	if (i < 2 || i > 6 || flg < 2 ||
+	if (i < 2 || i > 6 || f < 2 ||
 		str[i - 1][ft_strlen(str[i - 1]) - 1] == ',')
 		return (free_tmp(str, 1));
-	rgb = get_color(str, &flg);
+	rgb = get_color(str, &f);
 	flag == 'F' ? all->map.floor_color = rgb : 0;
 	flag == 'C' ? all->map.cell_color = rgb : 0;
-	return (flg == 3 ? free_tmp(str, 0) : free_tmp(str, 1));
+	return (f == 3 ? free_tmp(str, 0) : free_tmp(str, 1));
 }

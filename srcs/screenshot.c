@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   screenshot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alfarabi <alfarabi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrosie <mrosie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 13:05:47 by mrosie            #+#    #+#             */
-/*   Updated: 2021/03/01 19:46:27 by alfarabi         ###   ########.fr       */
+/*   Updated: 2021/03/10 17:46:05 by mrosie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static	void	img_to_bmp(t_all *all, int h, int w, int fd)
 	i = 1;
 	err = 0;
 	adr = all->prg.addr;
-	while (i < h)
+	while (i <= h)
 	{
 		j = 0;
 		pxl = w * (h - i);

@@ -6,30 +6,48 @@
 /*   By: mrosie <mrosie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 17:39:51 by mrosie            #+#    #+#             */
-/*   Updated: 2021/03/10 16:16:18 by mrosie           ###   ########.fr       */
+/*   Updated: 2021/03/11 14:02:00 by mrosie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int			is_num(char *str)
+int			flags_checker(int flg, char key, t_all *all)
 {
-	while (*str)
-		if (!ft_isdigit(*str++))
-			return (0);
-	return (1);
+	int flg_add;
+
+	if (key == 's')
+		flg_add = STH_F;
+	if (key == 'n')
+		flg_add = NRT_F;
+	if (key == 'w')
+		flg_add = WST_F;
+	if (key == 'e')
+		flg_add = EST_F;
+	if (key == 'S')
+		flg_add = SPR_F;
+	if (key == 'C')
+		flg_add = CEL_F;
+	if (key == 'F')
+		flg_add = FLR_F;
+	if (key == 'R')
+		flg_add = RES_F;
+	if (flg & flg_add)
+		return (error_handler("Double param"));
+	all->map.p_cnt += 1;
+	return (flg_add);
 }
 
-static	int	parse_path(char flag, char **str, t_all *all)
+static	int	parse_path(char flag, char **str, t_all *all, int *flg)
 {
 	char	*acc;
 	int		i;
 
 	i = 0;
+	*flg |= flags_checker(*flg, flag, all);
 	while (str[i])
 		i++;
-	acc = ft_strdup(str[1]);
-	if (i > 2 || i < 2 || !acc || ft_strlen(acc) < 5 ||
+	if (i > 2 || i < 2 || !(acc = ft_strdup(str[1])) ||
 		(ft_strncmp(&acc[ft_strlen(acc) - 4], ".xpm", 5)))
 		return (free_tmp(str, 1));
 	if (flag == 'n')
@@ -47,7 +65,7 @@ static	int	parse_path(char flag, char **str, t_all *all)
 	return (free_tmp(str, 0));
 }
 
-static	int	ft_parse_line(char *str, t_all *all)
+static	int	parse_line(char *str, t_all *all, int *flg)
 {
 	char	**acc;
 
@@ -57,21 +75,21 @@ static	int	ft_parse_line(char *str, t_all *all)
 	if (acc[0] == NULL)
 		return (free_tmp(acc, 0) - 1);
 	else if (!ft_strncmp(acc[0], "R", 2))
-		return (parse_resolution(acc, all));
+		return (parse_resolution(acc, all, flg));
 	else if (!ft_strncmp(acc[0], "S", 2))
-		return (parse_path('S', acc, all));
+		return (parse_path('S', acc, all, flg));
 	else if (!ft_strncmp(acc[0], "F", 2))
-		return (parse_color('F', acc, all));
+		return (parse_color('F', acc, all, flg));
 	else if (!ft_strncmp(acc[0], "C", 2))
-		return (parse_color('C', acc, all));
+		return (parse_color('C', acc, all, flg));
 	else if (!ft_strncmp(acc[0], "NO", 3))
-		return (parse_path('n', acc, all));
+		return (parse_path('n', acc, all, flg));
 	else if (!ft_strncmp(acc[0], "SO", 3))
-		return (parse_path('s', acc, all));
+		return (parse_path('s', acc, all, flg));
 	else if (!ft_strncmp(acc[0], "WE", 3))
-		return (parse_path('w', acc, all));
+		return (parse_path('w', acc, all, flg));
 	else if (!ft_strncmp(acc[0], "EA", 3))
-		return (parse_path('e', acc, all));
+		return (parse_path('e', acc, all, flg));
 	return (free_tmp(acc, 1));
 }
 
@@ -87,14 +105,14 @@ static	int	config_cube(t_list *map_lst, t_all *all)
 	return (0);
 }
 
-int			ft_parse_file(t_all *all, char *str)
+int			parse_file(t_all *all, char *str)
 {
 	char	*line;
 	t_list	*map_lst;
-	int		count;
 	int		err;
+	int		flg;
 
-	count = 0;
+	flg = NO_FLG;
 	err = 0;
 	map_lst = NULL;
 	if ((all->fd = open(str, O_RDONLY)) == -1)
@@ -103,10 +121,10 @@ int			ft_parse_file(t_all *all, char *str)
 	{
 		if (err == -1)
 			return (error_handler("gnl return -1"));
-		count < 8 ? count += ft_parse_line(line, all) : 0;
-		count == 9 ? ft_lstadd_back(&map_lst, ft_lstnew(line)) : 0;
-		count < 9 ? free(line) : 0;
-		count == 8 ? count += 1 : 0;
+		flg == ALL_FLG ? ft_lstadd_back(&map_lst, ft_lstnew(line)) : 0;
+		flg != ALL_FLG ? parse_line(line, all, &flg) : 0;
+		all->map.p_cnt < 9 ? free(line) : 0;
+		flg == ALL_FLG ? all->map.p_cnt += 1 : 0;
 	}
 	ft_lstadd_back(&map_lst, ft_lstnew(line));
 	return (config_cube(map_lst, all));

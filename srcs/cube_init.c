@@ -6,7 +6,7 @@
 /*   By: mrosie <mrosie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 16:16:29 by mrosie            #+#    #+#             */
-/*   Updated: 2021/02/28 17:13:17 by mrosie           ###   ########.fr       */
+/*   Updated: 2021/03/11 15:57:09 by mrosie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,26 @@ static	int	textrs_validation(void *a1, void *a2, void *a3, void *a4)
 	return (1);
 }
 
-static	int	init_textrs(t_all *all, t_tex *tex)
+static	int	init_textrs(t_all *all, t_atex *tex)
 {
-	tex->nrt_img = mlx_xpm_file_to_image(all->prg.mlx, all->map.north,
-											&all->tex.res, &all->tex.res);
-	(tex->sth_img = mlx_xpm_file_to_image(all->prg.mlx, all->map.south,
-											&all->tex.res, &all->tex.res));
-	(tex->wst_img = mlx_xpm_file_to_image(all->prg.mlx, all->map.west,
-											&all->tex.res, &all->tex.res));
-	(tex->est_img = mlx_xpm_file_to_image(all->prg.mlx, all->map.east,
-											&all->tex.res, &all->tex.res));
-	textrs_validation(tex->nrt_img, tex->sth_img, tex->wst_img, tex->est_img);
-	(tex->nrt_adr = mlx_get_data_addr(all->tex.nrt_img, &all->tex.bpp,
-											&all->tex.ll, &all->tex.end));
-	(tex->sth_adr = mlx_get_data_addr(all->tex.sth_img, &all->tex.bpp,
-											&all->tex.ll, &all->tex.end));
-	(tex->wst_adr = mlx_get_data_addr(all->tex.wst_img, &all->tex.bpp,
-											&all->tex.ll, &all->tex.end));
-	(tex->est_adr = mlx_get_data_addr(all->tex.est_img, &all->tex.bpp,
-											&all->tex.ll, &all->tex.end));
-	textrs_validation(tex->nrt_adr, tex->sth_adr, tex->wst_adr, tex->est_adr);
+	tex->nrt.img = mlx_xpm_file_to_image(all->prg.mlx, all->map.north,
+											&tex->nrt.x_wd, &tex->nrt.y_hg);
+	(tex->sth.img = mlx_xpm_file_to_image(all->prg.mlx, all->map.south,
+											&tex->sth.x_wd, &tex->sth.y_hg));
+	(tex->wst.img = mlx_xpm_file_to_image(all->prg.mlx, all->map.west,
+											&tex->wst.x_wd, &tex->wst.y_hg));
+	(tex->est.img = mlx_xpm_file_to_image(all->prg.mlx, all->map.east,
+											&tex->est.x_wd, &tex->est.y_hg));
+	textrs_validation(tex->nrt.img, tex->sth.img, tex->wst.img, tex->est.img);
+	(tex->nrt.adr = mlx_get_data_addr(tex->nrt.img, &tex->nrt.bpp,
+											&tex->nrt.ll, &tex->nrt.end));
+	(tex->sth.adr = mlx_get_data_addr(tex->sth.img, &tex->sth.bpp,
+											&tex->sth.ll, &tex->sth.end));
+	(tex->wst.adr = mlx_get_data_addr(tex->wst.img, &tex->wst.bpp,
+											&tex->wst.ll, &tex->wst.end));
+	(tex->est.adr = mlx_get_data_addr(tex->est.img, &tex->est.bpp,
+											&tex->est.ll, &tex->est.end));
+	textrs_validation(tex->nrt.adr, tex->sth.adr, tex->wst.adr, tex->est.adr);
 	return (1);
 }
 

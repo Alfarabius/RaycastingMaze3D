@@ -6,7 +6,7 @@
 /*   By: mrosie <mrosie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 15:09:04 by mrosie            #+#    #+#             */
-/*   Updated: 2021/03/10 15:46:44 by mrosie           ###   ########.fr       */
+/*   Updated: 2021/03/11 17:15:08 by mrosie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ static	void	init_var_and_const(t_all *all)
 	all->plr.plane_x = FOV;
 	all->plr.plane_y = FOV;
 	all->dta.spt_amt = 0;
+	all->map.p_cnt = 0;
+	all->tex.nrt.side = 0;
+	all->tex.sth.side = 2;
+	all->tex.est.side = 1;
+	all->tex.wst.side = 3;
 }
 
 static	void	plr_spd(t_all *all)
@@ -40,11 +45,10 @@ static	int		quit(int button_code, t_all *all)
 
 void			prg_init(t_all *all, char **argv)
 {
-	if ((ft_strlen(argv[1]) < 5) ||
-		!(ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4], ".cub", 5)))
+	if (!(ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4], ".cub", 5)))
 	{
 		init_var_and_const(all);
-		ft_parse_file(all, argv[1]);
+		parse_file(all, argv[1]);
 		cube_init(all);
 		plr_spd(all);
 		if (argv[2] && (!(ft_strncmp(argv[2], "--save", 7))))

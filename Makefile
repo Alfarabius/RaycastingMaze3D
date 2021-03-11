@@ -45,7 +45,7 @@ all:	init $(NAME)
 
 $(OBJS_PATH)/%.o:	$(SRCS_PATH)/%.c $(HEAD)
 	@ echo "compile $@"
-	@ $(CC) $(CFLAGS) $(INC) -c $< -o $@
+	@ $(CC) $(CFLAGS) $(INC) -c $< -o $@ -g
 
 $(NAME):	$(HEAD)	$(OBJS) $(LIBFT)
 	@ $(CC) $(CFLAGS) -O2 -o $@ $(INC) $(OBJS) $(LIBFT) $(DYLIB) -L $(MLX_PATH) $(MLX) $(OPENGL) $(APPKIT)
