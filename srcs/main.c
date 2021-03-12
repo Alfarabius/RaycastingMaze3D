@@ -6,7 +6,7 @@
 /*   By: mrosie <mrosie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 15:09:04 by mrosie            #+#    #+#             */
-/*   Updated: 2021/03/11 17:15:08 by mrosie           ###   ########.fr       */
+/*   Updated: 2021/03/12 11:46:30 by mrosie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static	int		quit(int button_code, t_all *all)
 
 void			prg_init(t_all *all, char **argv)
 {
-	if (!(ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4], ".cub", 5)))
+	if (valid_file(".cub", argv[1], 5))
 	{
 		init_var_and_const(all);
 		parse_file(all, argv[1]);

@@ -6,7 +6,7 @@
 /*   By: mrosie <mrosie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 17:39:51 by mrosie            #+#    #+#             */
-/*   Updated: 2021/03/11 14:02:00 by mrosie           ###   ########.fr       */
+/*   Updated: 2021/03/12 11:55:19 by mrosie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static	int	parse_path(char flag, char **str, t_all *all, int *flg)
 	while (str[i])
 		i++;
 	if (i > 2 || i < 2 || !(acc = ft_strdup(str[1])) ||
-		(ft_strncmp(&acc[ft_strlen(acc) - 4], ".xpm", 5)))
+		!valid_file(".xpm", acc, 5))
 		return (free_tmp(str, 1));
 	if (flag == 'n')
 		all->map.north = acc;

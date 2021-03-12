@@ -6,7 +6,7 @@
 /*   By: mrosie <mrosie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:19:17 by mrosie            #+#    #+#             */
-/*   Updated: 2021/03/11 18:01:41 by mrosie           ###   ########.fr       */
+/*   Updated: 2021/03/12 11:45:22 by mrosie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,5 +244,6 @@ int				strafe_player(t_all *all, float x_off, float y_off);
 int				turn_player(t_all *all, float ang);
 void			my_pixel_put(t_prg *data, int x, int y, int color);
 int				flags_checker(int flg, char key, t_all *all);
+int				valid_file(char *frm, char *arg, int size);
 
 #endif

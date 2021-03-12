@@ -22,7 +22,7 @@ SRCS	=	calc_line.c \
 			get_next_line_utils.c \
 			map.c \
 			parse_sprite.c \
-			my_pixel_put.c \
+			utils.c \
 			create_map.c
 
 HEAD	=	$(INC_PATH)/cub.h

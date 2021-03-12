@@ -6,7 +6,7 @@
 /*   By: mrosie <mrosie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 17:01:14 by mrosie            #+#    #+#             */
-/*   Updated: 2021/03/11 18:19:27 by mrosie           ###   ########.fr       */
+/*   Updated: 2021/03/12 11:31:04 by mrosie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static	unsigned int	get_color(t_tex *side)
 	unsigned int	color;
 	int				textr_y;
 
-	textr_y = ((int)side->start) & (side->y_hg - 1);
+	textr_y = (int)side->start;
+	textr_y = textr_y >= side->y_hg ? side->y_hg - 1 : textr_y;
 	side->start += side->ratio;
 	color = *((unsigned int *)(side->adr + (textr_y * side->ll
 		+ side->textr_x * (side->bpp / 8))));
