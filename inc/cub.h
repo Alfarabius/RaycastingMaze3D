@@ -18,6 +18,7 @@
 # include <string.h>
 # include <math.h>
 # include "../Libft/libft.h"
+# include <stdint.h>
 # define GREY 0xd1dddd
 # define WHITE 0xffffff
 # define FOV 0.66
