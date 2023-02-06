@@ -5,5 +5,5 @@ This is my learning project in School 21 (Ecole 42)
 ``make && ./cub3D configs/main.cub``
 
 
-https://user-images.githubusercontent.com/47622374/216886509-8f7844c7-0d5c-4285-9fc2-9d52e255a604.mov
+https://user-images.githubusercontent.com/47622374/216887020-2a5b3e0f-b86e-4f59-a399-ca5f4f4d38e4.mp4
 
